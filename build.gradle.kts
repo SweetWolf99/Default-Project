@@ -46,7 +46,7 @@ tasks{
             copy {
                 from(archiveFile)
                 val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - vanilla\\plugins")
-                into(if (File(plugins, archiveFileName.get()).exists()) File(plugins, "update") else plugins)
+                into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
             }
         }
     }
