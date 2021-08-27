@@ -1,2 +1,1 @@
-rootProject.name = "MineCraftDefaultProject"
-
+rootProject.name = "Murder"

@@ -1,0 +1,19 @@
+package kr.kro.minestar.murder.creature.slayer.job
+
+import kr.kro.minestar.murder.creature.interfaces.creature.Slayer
+import kr.kro.minestar.murder.creature.interfaces.item.Weapon
+import kr.kro.minestar.murder.creature.interfaces.skill.ActiveSkill
+import kr.kro.minestar.murder.creature.interfaces.skill.PassiveSkill
+import kr.kro.minestar.murder.creature.slayer.skill.active.*
+import kr.kro.minestar.murder.creature.slayer.skill.passive.*
+import kr.kro.minestar.murder.creature.slayer.weapon.*
+import org.bukkit.entity.Player
+
+class Slaughter222(override var player: Player?) : Slayer {
+    override var name: String = "도살자222"
+    override var codeName: String = this.javaClass.name
+    override var number: Int = 2
+    override var weapon: Weapon = MurderAxe()
+    override var activeSkill: ActiveSkill = Dash(player!!)
+    override var passiveSkill: PassiveSkill = Rush(player!!)
+}

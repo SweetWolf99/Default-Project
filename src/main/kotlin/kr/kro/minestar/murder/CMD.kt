@@ -1,5 +1,6 @@
-package kr.kro.minestar
+package kr.kro.minestar.murder
 
+import kr.kro.minestar.murder.functions.Function
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -7,12 +8,17 @@ import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 
 class CMD : CommandExecutor, TabCompleter {
-    val args0 = listOf("argsList_0", "argsList_1", "argsList_2", "argsList_3", "argsList_4")
+    val args0 = listOf("test1")
     override fun onCommand(p: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (p !is Player) return false
         if (args.isEmpty()) {
             p.sendMessage("null")
             return false
+        } else {
+            when (args[0]) {
+                "test1" -> Function().setSlayer(p)
+//                "test2"-> p.sendMessage(Function().randomSlayer()!!)
+            }
         }
         return false
     }

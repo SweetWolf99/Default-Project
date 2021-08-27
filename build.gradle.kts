@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
 }
 
-group = "kr.kro.minestar"
+group = "kr.kro.minestar.murder"
 version = "1.0.0"
 
 repositories {
@@ -45,7 +45,7 @@ tasks{
             // jar file copy
             copy {
                 from(archiveFile)
-                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - vanilla\\plugins")
+                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - Murder\\plugins")
                 into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
             }
         }
