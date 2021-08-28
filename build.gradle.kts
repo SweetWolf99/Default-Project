@@ -21,6 +21,8 @@ dependencies {
     implementation("net.kyori:adventure-api:4.7.0")
     compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
 
+    implementation("org.reflections:reflections:0.9.12")
+
     //project_TL
     implementation("net.projecttl:InventoryGUI-api:4.1.1")
 

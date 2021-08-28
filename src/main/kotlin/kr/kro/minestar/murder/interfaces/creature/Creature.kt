@@ -1,11 +1,10 @@
-package kr.kro.minestar.murder.creature.interfaces.skill
+package kr.kro.minestar.murder.interfaces.creature
 
 import org.bukkit.entity.Player
 
-interface Skill {
+interface Creature {
     var player: Player
     var number: Int
     var name: String
     var codeName: String
-    var description: MutableList<String>
 }

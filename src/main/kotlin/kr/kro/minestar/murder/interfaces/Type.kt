@@ -1,4 +1,4 @@
-package kr.kro.minestar.murder.creature.interfaces.skill
+package kr.kro.minestar.murder.interfaces
 
 enum class Type {
     MOVEMENT,

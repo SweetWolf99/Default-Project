@@ -1,18 +1,23 @@
-package kr.kro.minestar.murder.creature.slayer.skill.active
+package kr.kro.minestar.murder.creature.skill.active
 
-import kr.kro.minestar.murder.creature.interfaces.skill.ActiveSkill
-import kr.kro.minestar.murder.creature.interfaces.skill.Type
+import kr.kro.minestar.murder.Main
+import kr.kro.minestar.murder.interfaces.skill.ActiveSkill
+import kr.kro.minestar.murder.interfaces.Type
+import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitTask
 import org.bukkit.util.Vector
 
 class Dash(override var player: Player) : ActiveSkill {
+    init {
+        Bukkit.getPluginManager().registerEvents(this, Main.pl!!)
+    }
     override var number: Int = 1
     override var name: String = "대쉬"
     override var codeName: String = this.javaClass.name
     override var description = mutableListOf(
-        "§f§7전방으로 돌진합니다.",
-        "§f§7하지만 어림도 없지"
+        "전방으로 돌진합니다.",
+        "하지만 어림도 없지"
     )
     override var coolTime: Long = 20 * 5
     override var coolDown: Long = 0

@@ -12,7 +12,6 @@ class Main : JavaPlugin() {
         pl = this
         logger.info("$prefix §aEnable")
         getCommand("murder")?.setExecutor(CMD())
-        server.pluginManager.registerEvents(Event(),this)
     }
 
     override fun onDisable() {
