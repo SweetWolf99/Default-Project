@@ -1,6 +1,6 @@
 package kr.kro.minestar.murder.interfaces.item
 
-import kr.kro.minestar.murder.functions.SetCreature
+import kr.kro.minestar.murder.functions.CreatureClass
 import kr.kro.minestar.murder.interfaces.Type
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -23,7 +23,7 @@ interface Tool :Item,Listener{
         if (itemMeta == null) return
         if (itemMeta.displayName == null) return
         if (!itemMeta.displayName.contains(display)) return
-        if (SetCreature.playerCreature[e.player.uniqueId] == null) return
+        if (CreatureClass.playerCreature[e.player.uniqueId] == null) return
         active()
     }
 

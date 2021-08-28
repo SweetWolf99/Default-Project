@@ -1,7 +1,7 @@
 package kr.kro.minestar.murder.interfaces.skill
 
 import kr.kro.minestar.murder.Main
-import kr.kro.minestar.murder.functions.SetCreature
+import kr.kro.minestar.murder.functions.CreatureClass
 import kr.kro.minestar.murder.interfaces.Type
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -30,7 +30,7 @@ interface ActiveSkill : Skill, Listener {
         if (itemMeta == null) return
         if (itemMeta.displayName == null) return
         if (!itemMeta.displayName.contains(name)) return
-        if (SetCreature.playerCreature[e.player.uniqueId] == null) return
+        if (CreatureClass.playerCreature[e.player.uniqueId] == null) return
         active()
     }
 
