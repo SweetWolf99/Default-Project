@@ -15,8 +15,6 @@ interface Tool :Item,Listener{
 
     @EventHandler
     fun use(e: PlayerInteractEvent) {
-        if (e.action != Action.RIGHT_CLICK_AIR && e.action != Action.RIGHT_CLICK_BLOCK) return
-        if (e.action == Action.RIGHT_CLICK_BLOCK && e.hand == EquipmentSlot.HAND) return
         val item = e.player.inventory.itemInMainHand
         val itemMeta = item.itemMeta
         if (item == null) return
@@ -24,10 +22,10 @@ interface Tool :Item,Listener{
         if (itemMeta.displayName == null) return
         if (!itemMeta.displayName.contains(display)) return
         if (CreatureClass.playerCreature[e.player.uniqueId] == null) return
-        active()
+        active(e)
     }
 
-    fun active()
+    fun active(e: PlayerInteractEvent)
 
     fun getTool(): ItemStack {
         val item = ItemStack(material)

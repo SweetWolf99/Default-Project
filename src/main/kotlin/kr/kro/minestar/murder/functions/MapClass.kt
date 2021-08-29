@@ -22,7 +22,7 @@ enum class Rotate {
     NORTH, SOUTH, EAST, WEST
 }
 
-class MapClass() {
+class MapClass {
 
 
     fun createMap(p: Player, mapName: String, rotate: Rotate) {
@@ -63,7 +63,7 @@ class MapClass() {
     }
 
     fun randomMap(): File {
-        val folder = File(Main.pl!!.dataFolder.toString()).listFiles()
+        val folder = File(Main.pl!!.dataFolder.toString() + "/map").listFiles()
         return folder[Random.nextInt(folder.size)]
     }
 

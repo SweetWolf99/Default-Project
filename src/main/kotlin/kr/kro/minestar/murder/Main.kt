@@ -1,5 +1,7 @@
 package kr.kro.minestar.murder
 
+import kr.kro.minestar.murder.functions.JavaCode
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin() {

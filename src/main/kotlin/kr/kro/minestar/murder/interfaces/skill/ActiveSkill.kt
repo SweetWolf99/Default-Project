@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.scheduler.BukkitTask
@@ -21,16 +22,8 @@ interface ActiveSkill : Skill, Listener {
     var type: Type
 
     @EventHandler
-    fun use(e: PlayerInteractEvent) {
-        if (e.action != Action.RIGHT_CLICK_AIR && e.action != Action.RIGHT_CLICK_BLOCK) return
-        if (e.action == Action.RIGHT_CLICK_BLOCK && e.hand == EquipmentSlot.HAND) return
-        val item = e.player.inventory.itemInMainHand
-        val itemMeta = item.itemMeta
-        if (item == null) return
-        if (itemMeta == null) return
-        if (itemMeta.displayName == null) return
-        if (!itemMeta.displayName.contains(name)) return
-        if (CreatureClass.playerCreature[e.player.uniqueId] == null) return
+    fun use(e: PlayerSwapHandItemsEvent) {
+        e.isCancelled = true
         active()
     }
 

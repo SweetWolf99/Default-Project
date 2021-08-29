@@ -1,6 +1,7 @@
 package kr.kro.minestar.murder
 
 import kr.kro.minestar.murder.functions.CreatureClass
+import kr.kro.minestar.murder.functions.GameSystem
 import kr.kro.minestar.murder.functions.MapClass
 import kr.kro.minestar.murder.functions.Rotate
 import org.bukkit.command.Command
@@ -11,7 +12,7 @@ import org.bukkit.entity.Player
 import java.io.File
 
 class CMD : CommandExecutor, TabCompleter {
-    private val args0 = listOf("test", "map", "creature")
+    private val args0 = listOf("test", "map", "creature", "lock","start")
     private val argsCreature = listOf("set", "reset")
     private val argsSlayerOrSacrificer = listOf("slayer", "sacrificer")
     private val argsMap = listOf("create", "add", "teleport", "tp", "move", "delete", "del", "remove")
@@ -67,6 +68,13 @@ class CMD : CommandExecutor, TabCompleter {
                         }
                     }
                 }
+
+                "lock" -> {
+                    if (GameSystem.lockEvent == null) GameSystem().eventLockOn(p)
+                    else GameSystem().eventLockOff(p)
+                }
+
+                "start" -> GameSystem().start()
             }
         }
         return false
