@@ -4,18 +4,20 @@ import kr.kro.minestar.murder.functions.CreatureClass
 import kr.kro.minestar.murder.functions.GameSystem
 import kr.kro.minestar.murder.functions.MapClass
 import kr.kro.minestar.murder.functions.Rotate
+import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import java.io.File
 
 class CMD : CommandExecutor, TabCompleter {
-    private val args0 = listOf("test", "map", "creature", "lock","start")
+    private val args0 = listOf("test", "map", "creature", "lock", "start", "stop")
     private val argsCreature = listOf("set", "reset")
     private val argsSlayerOrSacrificer = listOf("slayer", "sacrificer")
-    private val argsMap = listOf("create", "add", "teleport", "tp", "move", "delete", "del", "remove")
+    private val argsMap = listOf("create", "teleport", "tp", "delete", "del")
     private val rotate = listOf("SOUTH", "NORTH", "WAST", "EAST")
     override fun onCommand(p: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (p !is Player) return false
@@ -25,6 +27,12 @@ class CMD : CommandExecutor, TabCompleter {
         } else {
             when (args[0]) {
                 "test" -> {
+                    val item = ItemStack(Material.FLINT)
+                    val itemMeta = item.itemMeta
+                    itemMeta.setDisplayName("§f권총 부품 [§cPARTS§f]")
+                    item.itemMeta = itemMeta
+                    item.amount = 10
+                    p.inventory.addItem(item)
                 }
 
                 "map" -> {
@@ -37,11 +45,11 @@ class CMD : CommandExecutor, TabCompleter {
                             if (args.size != 4) p.sendMessage("${Main.prefix} /murder map create <Rotate> <MapName>")
                             else map.createMap(p, args[3], Rotate.valueOf(args[2].toUpperCase()))
                         }
-                        "teleport", "tp", "move" -> {
+                        "teleport", "tp" -> {
                             if (args.size != 3) p.sendMessage("${Main.prefix} /murder map teleport <MapName>")
                             else map.teleportMap(p, map.getMap(args[2]))
                         }
-                        "delete", "del", "remove" -> {
+                        "delete", "del" -> {
                             if (args.size != 3) p.sendMessage("${Main.prefix} /murder map delete <MapName>")
                             else map.deleteMap(p, map.getMap(args[2]))
                         }
@@ -70,11 +78,12 @@ class CMD : CommandExecutor, TabCompleter {
                 }
 
                 "lock" -> {
-                    if (GameSystem.lockEvent == null) GameSystem().eventLockOn(p)
+                    if (GameSystem.gameEvent == null) GameSystem().eventLockOn(p)
                     else GameSystem().eventLockOff(p)
                 }
 
-                "start" -> GameSystem().start()
+                "start" -> GameSystem().start(p)
+                "stop" -> GameSystem().gameOver(p)
             }
         }
         return false
@@ -88,10 +97,10 @@ class CMD : CommandExecutor, TabCompleter {
             "map" -> {
                 if (args.size == 2) for (s in argsMap) if (s.contains(args[1])) list.add(s)
                 when (args[1]) {
-                    "create", "add" -> if (args.size == 3) for (s in rotate) if (s.contains(args[2].toUpperCase())) list.add(s)
+                    "create" -> if (args.size == 3) for (s in rotate) if (s.contains(args[2].toUpperCase())) list.add(s)
 
-                    "teleport", "tp", "move",
-                    "delete", "del", "remove" -> if (args.size == 3) for (s in maps) if (s.name.replace(".yml", "").contains(args[2])) list.add(s.name.replace(".yml", ""))
+                    "teleport", "tp",
+                    "delete", "del" -> if (args.size == 3) for (s in maps) if (s.name.replace(".yml", "").contains(args[2])) list.add(s.name.replace(".yml", ""))
                 }
             }
 

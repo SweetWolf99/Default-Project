@@ -11,6 +11,7 @@ import org.bukkit.util.Vector
 class Dash(override var player: Player) : ActiveSkill {
     init {
         Bukkit.getPluginManager().registerEvents(this, Main.pl!!)
+        Bukkit.getScheduler().runTask(Main.pl!!, Runnable { startCoolDownTimer() })
     }
     override var number: Int = 1
     override var name: String = "대쉬"
@@ -20,7 +21,7 @@ class Dash(override var player: Player) : ActiveSkill {
         "하지만 어림도 없지"
     )
     override var coolTime: Long = 20 * 5
-    override var coolDown: Long = 0
+    override var coolDown: Long = coolTime
     override var coolDownTimer: BukkitTask? = null
     override var duration: Long = 20 * 0
     override var type: Type = Type.MOVEMENT

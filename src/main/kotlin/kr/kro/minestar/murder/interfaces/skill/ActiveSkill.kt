@@ -23,6 +23,7 @@ interface ActiveSkill : Skill, Listener {
 
     @EventHandler
     fun use(e: PlayerSwapHandItemsEvent) {
+        if(e.player != player) return
         e.isCancelled = true
         active()
     }
@@ -37,6 +38,18 @@ interface ActiveSkill : Skill, Listener {
 
     fun coolDownTimer() {
         coolDown = coolTime
+        coolDownTimer = Bukkit.getScheduler().runTaskTimer(Main.pl!!, Runnable {
+            if (coolDown > 1) --coolDown
+            else {
+                player.sendTitle(" ", "§9액티브 스킬 준비완료", 5, 10, 5)
+                Bukkit.getScheduler().runTask(Main.pl!!, Runnable { coolDownTimer?.cancel() })
+                --coolDown
+            }
+        }, 1, 1)
+    }
+
+    fun startCoolDownTimer() {
+        if(coolDown == 0L) return
         coolDownTimer = Bukkit.getScheduler().runTaskTimer(Main.pl!!, Runnable {
             if (coolDown > 1) --coolDown
             else {

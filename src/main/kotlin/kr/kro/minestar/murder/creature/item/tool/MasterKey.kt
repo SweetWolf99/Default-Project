@@ -33,13 +33,14 @@ class MasterKey(override var player: Player) : Tool, Listener {
         if (door !is Door) return
         if(!door.isOpen) {
             door.isOpen = true
-            e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_WOODEN_DOOR_OPEN,SoundCategory.BLOCKS,1F,1F)
+            if(door.material == Material.IRON_DOOR)e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_IRON_DOOR_OPEN,SoundCategory.BLOCKS,1F,1F)
+            else e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_WOODEN_DOOR_OPEN,SoundCategory.BLOCKS,1F,1F)
         }
         else if(door.isOpen) {
             door.isOpen = false
-            e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_WOODEN_DOOR_CLOSE,SoundCategory.BLOCKS,1F,1F)
+            if(door.material == Material.IRON_DOOR) e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_IRON_DOOR_CLOSE,SoundCategory.BLOCKS,1F,1F)
+            else e.clickedBlock!!.location.world.playSound(e.clickedBlock!!.location,Sound.BLOCK_WOODEN_DOOR_CLOSE,SoundCategory.BLOCKS,1F,1F)
         }
         e.clickedBlock!!.blockData = door
-
     }
 }

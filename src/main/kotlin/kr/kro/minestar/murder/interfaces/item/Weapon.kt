@@ -1,5 +1,6 @@
 package kr.kro.minestar.murder.interfaces.item
 
+import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -14,10 +15,13 @@ interface Weapon : Item, Listener {
     @EventHandler
     fun hit(e: EntityDamageByEntityEvent) {
         e.isCancelled = true
-        if (e.entity !is Player) return
-        if (e.damager !is Player) return
-        if ((e.damager as Player).inventory.itemInMainHand.itemMeta == null) return
-        if (!(e.damager as Player).inventory.itemInMainHand.itemMeta.displayName.contains(display)) return
+        val damaged = e.entity
+        val damager = e.damager
+        if (damaged !is Player) return
+        if (damager !is Player) return
+        if (damager != player) return
+        if (damager.inventory.itemInMainHand.itemMeta == null) return
+        if (!damager.inventory.itemInMainHand.itemMeta.displayName.contains(display)) return
         val damage = (e.damager as Player).attackCooldown * damage
         if ((e.entity as Player).health <= damage) {
             kill(e)

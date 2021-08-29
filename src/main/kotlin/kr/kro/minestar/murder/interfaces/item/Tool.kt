@@ -15,6 +15,7 @@ interface Tool :Item,Listener{
 
     @EventHandler
     fun use(e: PlayerInteractEvent) {
+        if(e.player != player) return
         val item = e.player.inventory.itemInMainHand
         val itemMeta = item.itemMeta
         if (item == null) return

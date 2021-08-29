@@ -52,6 +52,7 @@ class CreatureClass {
             HandlerList.unregisterAll(job.activeSkill)
         }
         if (job is Sacrificer) {
+            HandlerList.unregisterAll(job!!)
             if (job.tool != null) HandlerList.unregisterAll(job.tool!!)
             if (job.activeSkill != null) HandlerList.unregisterAll(job.activeSkill!!)
         }
