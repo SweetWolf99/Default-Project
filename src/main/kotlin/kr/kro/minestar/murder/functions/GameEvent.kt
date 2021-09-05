@@ -10,6 +10,7 @@ import org.bukkit.event.block.BlockBreakEvent
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.player.PlayerAttemptPickupItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerPickupItemEvent
@@ -18,11 +19,6 @@ class GameEvent : Listener {
     var damageCancel = true
     init {
         Bukkit.getPluginManager().registerEvents(this, Main.pl!!)
-    }
-
-    @EventHandler
-    fun blockInteract(e: PlayerInteractEvent) {
-        if (e.action == Action.RIGHT_CLICK_BLOCK) e.isCancelled = true
     }
 
     @EventHandler
@@ -43,5 +39,10 @@ class GameEvent : Listener {
     @EventHandler
     fun hitCancel(e: EntityDamageByEntityEvent) {
         if(CreatureClass.playerCreature[e.damager.uniqueId] !is Slayer) e.isCancelled = true
+    }
+
+    @EventHandler
+    fun foodLevelChange(e: FoodLevelChangeEvent) {
+        e.isCancelled = true
     }
 }

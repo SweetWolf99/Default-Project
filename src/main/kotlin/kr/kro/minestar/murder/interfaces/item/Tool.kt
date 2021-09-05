@@ -12,7 +12,8 @@ import org.bukkit.inventory.ItemStack
 
 interface Tool :Item,Listener{
     var type: Type
-
+    var description: List<String>
+    var amount: Int
     @EventHandler
     fun use(e: PlayerInteractEvent) {
         if(e.player != player) return
@@ -23,15 +24,16 @@ interface Tool :Item,Listener{
         if (itemMeta.displayName == null) return
         if (!itemMeta.displayName.contains(display)) return
         if (CreatureClass.playerCreature[e.player.uniqueId] == null) return
-        active(e)
+        if(active(e)) --item.amount
     }
 
-    fun active(e: PlayerInteractEvent)
+    fun active(e: PlayerInteractEvent):Boolean
 
     fun getTool(): ItemStack {
         val item = ItemStack(material)
         val itemMeta = item.itemMeta
         val lore = mutableListOf(" ")
+        item.amount = amount
         for (s in description) lore.add("§f§7$s")
         itemMeta.setDisplayName("§f$display [§cTOOL§f]")
         itemMeta.lore = lore

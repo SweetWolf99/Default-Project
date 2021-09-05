@@ -15,6 +15,8 @@ class CreatureClass {
     companion object {
         val playerCreature: MutableMap<UUID, Creature> = HashMap()
     }
+    val slayerPackage = "kr.kro.minestar.murder.object.creature.slayer"
+    val sacrificerPackage = "kr.kro.minestar.murder.object.creature.sacrificer"
 
     fun setSlayer(slayer: Slayer) {
         val p = slayer.player
@@ -52,9 +54,12 @@ class CreatureClass {
             HandlerList.unregisterAll(job.activeSkill)
         }
         if (job is Sacrificer) {
-            HandlerList.unregisterAll(job!!)
+            HandlerList.unregisterAll(job)
             if (job.tool != null) HandlerList.unregisterAll(job.tool!!)
             if (job.activeSkill != null) HandlerList.unregisterAll(job.activeSkill!!)
+            if (job.passiveSkill != null) job.passiveSkill!!.tick!!.cancel()
+            if(job.coolDownTimer != null)job.coolDownTimer!!.cancel()
+            job.spawnParts!!.cancel()
         }
         playerCreature.remove(p.uniqueId)
     }
@@ -65,42 +70,42 @@ class CreatureClass {
     }
 
     fun getSlayerList(): List<String> {
-        val pack = packageInClasses("kr.kro.minestar.murder.creature.slayer")!!.toTypedArray()
+        val pack = packageInClasses(slayerPackage)!!.toTypedArray()
         val list: MutableList<String> = mutableListOf()
         for (c in pack) list.add(c.simpleName)
         return list
     }
     fun getSacrificerList(): List<String> {
-        val pack = packageInClasses("kr.kro.minestar.murder.creature.sacrificer")!!.toTypedArray()
+        val pack = packageInClasses(sacrificerPackage)!!.toTypedArray()
         val list: MutableList<String> = mutableListOf()
         for (c in pack) list.add(c.simpleName)
         return list
     }
 
     fun getSlayer(player: Player, slayerName: String): Slayer {
-        var slayerClass: Class<*>? = Class.forName("kr.kro.minestar.murder.creature.slayer.$slayerName")
+        var slayerClass: Class<*>? = Class.forName("$slayerPackage.$slayerName")
         var constructor = slayerClass!!.constructors
         return constructor[0].newInstance(player) as Slayer
     }
 
     fun getSacrificer(player: Player, sacrificerName: String): Sacrificer {
-        var slayerClass: Class<*>? = Class.forName("kr.kro.minestar.murder.creature.sacrificer.$sacrificerName")
+        var slayerClass: Class<*>? = Class.forName("$sacrificerPackage.$sacrificerName")
         var constructor = slayerClass!!.constructors
         return constructor[0].newInstance(player) as Sacrificer
     }
 
      fun randomSlayer(player: Player): Slayer {
-        val pack = packageInClasses("kr.kro.minestar.murder.creature.slayer")!!.toTypedArray()
+        val pack = packageInClasses(slayerPackage)!!.toTypedArray()
         val r = Random().nextInt(pack.size)
-        var slayerClass: Class<*>? = Class.forName("kr.kro.minestar.murder.creature.slayer." + pack[r].simpleName)
+        var slayerClass: Class<*>? = Class.forName("$slayerPackage." + pack[r].simpleName)
         var constructor = slayerClass!!.constructors
         return constructor[0].newInstance(player) as Slayer
     }
 
      fun randomSacrificer(player: Player): Sacrificer {
-        val pack = packageInClasses("kr.kro.minestar.murder.creature.sacrificer")!!.toTypedArray()
+        val pack = packageInClasses(sacrificerPackage)!!.toTypedArray()
         val r = Random().nextInt(pack.size)
-        var sacrificerClass: Class<*>? = Class.forName("kr.kro.minestar.murder.creature.sacrificer." + pack[r].simpleName)
+        var sacrificerClass: Class<*>? = Class.forName("$sacrificerPackage." + pack[r].simpleName)
         var constructor = sacrificerClass!!.constructors
         return constructor[0].newInstance(player) as Sacrificer
     }

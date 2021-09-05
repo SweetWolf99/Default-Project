@@ -1,4 +1,4 @@
-package kr.kro.minestar.murder.creature.skill.active
+package kr.kro.minestar.murder.`object`.skill.slayer.active
 
 import kr.kro.minestar.murder.Main
 import kr.kro.minestar.murder.interfaces.skill.ActiveSkill
@@ -17,8 +17,7 @@ class Dash(override var player: Player) : ActiveSkill {
     override var name: String = "대쉬"
     override var codeName: String = this.javaClass.name
     override var description = mutableListOf(
-        "전방으로 돌진합니다.",
-        "하지만 어림도 없지"
+        "전방으로 돌진합니다"
     )
     override var coolTime: Long = 20 * 5
     override var coolDown: Long = coolTime
@@ -31,7 +30,7 @@ class Dash(override var player: Player) : ActiveSkill {
         val x = player.location.direction.x
         val z = player.location.direction.z
         val v = Vector(x, 0.0, z).normalize()
-        player.velocity = v.add(Vector(0, 0, 0)).multiply(5).setY(0.5)
+        player.velocity = v.add(Vector(0, 0, 0)).multiply(2).setY(0.5)
         coolDownTimer()
     }
 }

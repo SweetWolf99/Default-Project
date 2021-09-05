@@ -1,7 +1,7 @@
-package kr.kro.minestar.murder.creature.sacrificer
+package kr.kro.minestar.murder.`object`.creature.sacrificer
 
 import kr.kro.minestar.murder.Main
-import kr.kro.minestar.murder.creature.item.tool.MasterKey
+import kr.kro.minestar.murder.`object`.item.tool.MasterKey
 import kr.kro.minestar.murder.interfaces.creature.Sacrificer
 import kr.kro.minestar.murder.interfaces.item.Tool
 import kr.kro.minestar.murder.interfaces.skill.ActiveSkill
@@ -26,4 +26,5 @@ class KeyMaster(override var player: Player) : Sacrificer {
     override var coolTime: Long = 0
     override var coolDown: Long = 0
     override var coolDownTimer: BukkitTask? = null
+    override var spawnParts: BukkitTask? = null
 }

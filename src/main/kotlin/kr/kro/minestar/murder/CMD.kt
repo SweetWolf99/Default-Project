@@ -5,6 +5,8 @@ import kr.kro.minestar.murder.functions.GameSystem
 import kr.kro.minestar.murder.functions.MapClass
 import kr.kro.minestar.murder.functions.Rotate
 import org.bukkit.Material
+import org.bukkit.Sound
+import org.bukkit.SoundCategory
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -18,7 +20,7 @@ class CMD : CommandExecutor, TabCompleter {
     private val argsCreature = listOf("set", "reset")
     private val argsSlayerOrSacrificer = listOf("slayer", "sacrificer")
     private val argsMap = listOf("create", "teleport", "tp", "delete", "del")
-    private val rotate = listOf("SOUTH", "NORTH", "WAST", "EAST")
+    private val rotate = listOf("SOUTH", "NORTH", "WEST", "EAST")
     override fun onCommand(p: CommandSender, cmd: Command, label: String, args: Array<out String>): Boolean {
         if (p !is Player) return false
         if (args.isEmpty()) {
@@ -27,6 +29,7 @@ class CMD : CommandExecutor, TabCompleter {
         } else {
             when (args[0]) {
                 "test" -> {
+                    p.playSound(p.location, Sound.BLOCK_SCULK_SENSOR_CLICKING, SoundCategory.MASTER, 1.0F, 1.0F)
                     val item = ItemStack(Material.FLINT)
                     val itemMeta = item.itemMeta
                     itemMeta.setDisplayName("§f권총 부품 [§cPARTS§f]")

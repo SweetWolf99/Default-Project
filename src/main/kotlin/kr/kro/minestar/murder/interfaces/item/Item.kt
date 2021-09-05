@@ -8,5 +8,4 @@ interface Item {
     var material: Material
     var number: Int
     var display: String
-    var description: List<String>
 }
