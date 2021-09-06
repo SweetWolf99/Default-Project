@@ -1,15 +1,21 @@
 package kr.kro.minestar.murder.`object`.skill.slayer.passive
 
 import kr.kro.minestar.murder.Main
-import kr.kro.minestar.murder.interfaces.skill.PassiveSkill
 import kr.kro.minestar.murder.interfaces.Type
-import org.bukkit.*
+import kr.kro.minestar.murder.interfaces.skill.PassiveSkill
+import org.bukkit.Bukkit
+import org.bukkit.GameMode
+import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitTask
 
 class Chase(override var player: Player) : PassiveSkill {
+    init {
+        Bukkit.getPluginManager().registerEvents(this, Main.pl!!)
+    }
     override var number:Int = 1
     override var name:String = "추격"
     override var codeName: String = this.javaClass.name

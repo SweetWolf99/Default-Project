@@ -15,8 +15,8 @@ class CreatureClass {
     companion object {
         val playerCreature: MutableMap<UUID, Creature> = HashMap()
     }
-    val slayerPackage = "kr.kro.minestar.murder.object.creature.slayer"
-    val sacrificerPackage = "kr.kro.minestar.murder.object.creature.sacrificer"
+    private val slayerPackage = "kr.kro.minestar.murder.object.creature.slayer"
+    private val sacrificerPackage = "kr.kro.minestar.murder.object.creature.sacrificer"
 
     fun setSlayer(slayer: Slayer) {
         val p = slayer.player
@@ -52,12 +52,16 @@ class CreatureClass {
         if (job is Slayer) {
             HandlerList.unregisterAll(job.weapon)
             HandlerList.unregisterAll(job.activeSkill)
+            HandlerList.unregisterAll(job.passiveSkill)
         }
         if (job is Sacrificer) {
             HandlerList.unregisterAll(job)
             if (job.tool != null) HandlerList.unregisterAll(job.tool!!)
             if (job.activeSkill != null) HandlerList.unregisterAll(job.activeSkill!!)
-            if (job.passiveSkill != null) job.passiveSkill!!.tick!!.cancel()
+            if (job.passiveSkill != null) {
+                if (job.passiveSkill!!.tick != null) job.passiveSkill!!.tick!!.cancel()
+                HandlerList.unregisterAll(job.passiveSkill!!)
+            }
             if(job.coolDownTimer != null)job.coolDownTimer!!.cancel()
             job.spawnParts!!.cancel()
         }

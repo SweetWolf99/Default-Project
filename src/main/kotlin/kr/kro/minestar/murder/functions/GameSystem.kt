@@ -27,6 +27,7 @@ class GameSystem {
 
     fun eventLockOn(p: Player?) {
         if (gameEvent == null) gameEvent = GameEvent()
+        if(p != null) gameEvent!!.damageCancel = false
         p?.sendMessage("${Main.prefix} Event Lock §aOn")
     }
 

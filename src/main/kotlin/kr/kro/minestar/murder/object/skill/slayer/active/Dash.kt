@@ -19,7 +19,7 @@ class Dash(override var player: Player) : ActiveSkill {
     override var description = mutableListOf(
         "전방으로 돌진합니다"
     )
-    override var coolTime: Long = 20 * 5
+    override var coolTime: Long = 20 * 10
     override var coolDown: Long = coolTime
     override var coolDownTimer: BukkitTask? = null
     override var duration: Long = 20 * 0

@@ -11,6 +11,9 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitTask
 
 class Hide(override var player: Player) : PassiveSkill {
+    init {
+        Bukkit.getPluginManager().registerEvents(this, Main.pl!!)
+    }
     override var number: Int = 2
     override var name: String = "은신"
     override var codeName: String = this.javaClass.name
@@ -25,10 +28,14 @@ class Hide(override var player: Player) : PassiveSkill {
             if (player.isSneaking) {
                 val loc = player.location.block.location
                 var count = 0
-                if (loc.clone().add(1.0, 0.0, 0.0).block.type != Material.AIR) ++count
-                if (loc.clone().add(-1.0, 0.0, 0.0).block.type != Material.AIR) ++count
-                if (loc.clone().add(0.0, 0.0, 1.0).block.type != Material.AIR) ++count
-                if (loc.clone().add(0.0, 0.0, -1.0).block.type != Material.AIR) ++count
+                if (loc.clone().add(1.0, 0.0, 0.0).block.type != Material.AIR)
+                    if (loc.clone().add(1.0, 1.0, 0.0).block.type != Material.AIR) ++count
+                if (loc.clone().add(-1.0, 0.0, 0.0).block.type != Material.AIR)
+                    if (loc.clone().add(-1.0, 1.0, 0.0).block.type != Material.AIR) ++count
+                if (loc.clone().add(0.0, 0.0, 1.0).block.type != Material.AIR)
+                    if (loc.clone().add(0.0, 1.0, 1.0).block.type != Material.AIR) ++count
+                if (loc.clone().add(0.0, 0.0, -1.0).block.type != Material.AIR)
+                    if (loc.clone().add(0.0, 1.0, -1.0).block.type != Material.AIR) ++count
                 if (count >= 2) player.addPotionEffect(PotionEffect(PotionEffectType.INVISIBILITY, 11, 0))
             }
         }, 1, 10)

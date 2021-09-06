@@ -21,7 +21,7 @@ class Smoke(override var player: Player) : ActiveSkill {
         "연기를 뿜어 시야를 차단합니다"
     )
     override var coolTime: Long = 20 * 60
-    override var coolDown: Long = coolTime
+    override var coolDown: Long = 2
     override var coolDownTimer: BukkitTask? = null
     override var duration: Long = 20 * 0
     override var type: Type = Type.DISTURBING

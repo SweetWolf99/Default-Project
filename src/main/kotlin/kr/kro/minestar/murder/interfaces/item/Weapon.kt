@@ -26,10 +26,8 @@ interface Weapon : Item, Listener {
         if (damager.inventory.itemInMainHand.itemMeta == null) return
         if (!damager.inventory.itemInMainHand.itemMeta.displayName.contains(display)) return
         val damage = (e.damager as Player).attackCooldown * damage
-        if ((e.entity as Player).health <= damage) {
-            kill(e)
-            return
-        } else e.damage = damage
+        if ((e.entity as Player).health <= damage) kill(e)
+        e.damage = damage
         e.isCancelled = false
         hitEffect(e)
     }
@@ -37,7 +35,6 @@ interface Weapon : Item, Listener {
     fun kill(e: EntityDamageByEntityEvent) {
         player!!.world.playSound(e.entity.location, Sound.ENTITY_PLAYER_DEATH, SoundCategory.MASTER, 1.0F, 1.0F)
         player!!.world.playSound(e.entity.location, Sound.ENTITY_PLAYER_ATTACK_CRIT, SoundCategory.MASTER, 1.0F, 1.0F)
-        (e.entity as Player).gameMode = GameMode.SPECTATOR
         killEffect(e)
     }
 
@@ -58,7 +55,7 @@ interface Weapon : Item, Listener {
         lore.add("§f§7대미지 : $damage")
         itemMeta.setDisplayName("§f$display [§cWEAPON§f]")
         itemMeta.lore = lore
-        for(flag in ItemFlag.values()) itemMeta.addItemFlags(flag)
+        for (flag in ItemFlag.values()) itemMeta.addItemFlags(flag)
         itemMeta.isUnbreakable = true
         item.itemMeta = itemMeta
         return item

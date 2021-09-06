@@ -29,7 +29,7 @@ class BlastHammer(override var player: Player) : Weapon {
         val x = player.location.direction.x
         val z = player.location.direction.z
         val v = Vector(x, 0.0, z).normalize()
-        target.velocity = v.add(Vector(0, 0, 0)).multiply(1).setY(1.5)
+        target.velocity = v.add(Vector(0, 0, 0)).multiply(2.0).setY(3.0)
         player.world.playSound(player.location, Sound.ENTITY_GENERIC_EXPLODE, SoundCategory.MASTER, 1.0F, 1.0F)
         player.world.spawnParticle(Particle.EXPLOSION_LARGE, player.location, 5, 0.4, 0.0, 0.4, 0.0)
     }

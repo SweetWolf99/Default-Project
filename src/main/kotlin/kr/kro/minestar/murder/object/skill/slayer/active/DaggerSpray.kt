@@ -22,7 +22,7 @@ class DaggerSpray(override var player: Player) : ActiveSkill {
         "5블럭 이내에 있는 플레이어에게",
         "단검을 던져 '독 II'을 5초간 부여 합니다"
     )
-    override var coolTime: Long = 20 * 1
+    override var coolTime: Long = 20 * 20
     override var coolDown: Long = coolTime
     override var coolDownTimer: BukkitTask? = null
     override var duration: Long = 20 * 0
