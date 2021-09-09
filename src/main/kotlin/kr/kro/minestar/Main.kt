@@ -1,22 +1,19 @@
-package kr.kro.minestar.murder
+package kr.kro.minestar
 
 import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin() {
     companion object {
         var pl: Main? = null
-        const val prefix = "§f§7[§cMurder§7]§f"
+        const val prefix = "§f§7MineCraftDefaultProject§f"
     }
 
     override fun onEnable() {
         pl = this
         logger.info("$prefix §aEnable")
-        getCommand("murder")?.setExecutor(CMD())
+        getCommand("cmd")?.setExecutor(CMD())
     }
 
     override fun onDisable() {
-
     }
-
-
 }

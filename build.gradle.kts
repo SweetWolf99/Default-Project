@@ -1,10 +1,10 @@
 plugins {
-    kotlin("jvm") version "1.5.21"
+    kotlin("jvm") version "1.5.30"
     id("com.github.johnrengelman.shadow") version "7.0.0"
     `maven-publish`
 }
 
-group = "kr.kro.minestar.murder"
+group = "kr.kro.minestar"
 version = "1.0.0"
 
 repositories {
@@ -24,7 +24,6 @@ dependencies {
     implementation("org.reflections:reflections:0.9.12")
 
     //project_TL
-    implementation("net.projecttl:InventoryGUI-api:4.1.1")
 
     //MineStar
 }
@@ -47,7 +46,7 @@ tasks{
             // jar file copy
             copy {
                 from(archiveFile)
-                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - Murder\\plugins")
+                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - vanilla\\plugins")
                 into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
             }
         }
