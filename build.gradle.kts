@@ -9,21 +9,9 @@ version = "0.0.0"
 
 repositories {
     mavenCentral()
-    maven("https://papermc.io/repo/repository/maven-public/")
-    maven(url = "https://oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots"
-    }
-    maven(url = "https://jitpack.io/")
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation("net.kyori:adventure-api:4.7.0")
-    compileOnly("io.papermc.paper:paper-api:1.17.1-R0.1-SNAPSHOT")
-
-    implementation("org.reflections:reflections:0.9.12")
-
-    //MineStar
 }
 
 tasks{
@@ -47,7 +35,7 @@ tasks{
             // jar file copy
             copy {
                 from(archiveFile)
-                val plugins = File("C:\\Users\\SweetWolf\\Desktop\\바탕화면\\MC Server Folder\\MC Server 1.17.1 - Vanilla\\plugins")
+                val plugins = File("C:\\Users\\SweetWolf\\Desktop\\바탕화면")
                 into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
             }
         }
