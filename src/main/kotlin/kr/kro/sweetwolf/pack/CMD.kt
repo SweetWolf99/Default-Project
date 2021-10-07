@@ -1,4 +1,4 @@
-package kr.kro.minestar
+package kr.kro.sweetwolf.pack
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

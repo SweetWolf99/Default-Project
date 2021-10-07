@@ -4,8 +4,8 @@ plugins {
     `maven-publish`
 }
 
-group = "kr.kro.minestar"
-version = "1.0.0"
+group = "kr.kro.sweetwolf"
+version = "0.0.0"
 
 repositories {
     mavenCentral()
@@ -23,12 +23,13 @@ dependencies {
 
     implementation("org.reflections:reflections:0.9.12")
 
-    //project_TL
-
     //MineStar
 }
 
 tasks{
+    compileKotlin{
+        kotlinOptions.jvmTarget = "16"
+    }
     processResources {
         filesMatching("*.yml") {
             expand(project.properties)
@@ -46,7 +47,7 @@ tasks{
             // jar file copy
             copy {
                 from(archiveFile)
-                val plugins = File("C:\\Users\\MineStar\\Desktop\\MC Server folder\\MCserver 1.17.1 - vanilla\\plugins")
+                val plugins = File("C:\\Users\\SweetWolf\\Desktop\\바탕화면\\MC Server Folder\\MC Server 1.17.1 - Vanilla\\plugins")
                 into(if (File(plugins, archiveFileName.get()).exists()) plugins else plugins)
             }
         }
